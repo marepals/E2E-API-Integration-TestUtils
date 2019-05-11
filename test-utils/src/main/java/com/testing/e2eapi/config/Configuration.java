@@ -15,7 +15,7 @@ public class Configuration {
 	private String basePath;
 	
 	private String PROD_PROPERTIES = "prod.properties";
-	private String TEST_PROPERTIES = "test.properties";
+	private String TEST_PROPERTIES = "prod.properties";
 	
 	Properties props = new Properties();
 
@@ -24,16 +24,17 @@ public class Configuration {
 		
 		if(Env.equals("Prod")|| Env.equals("prod")) 
 			inputStream = getClass().getClassLoader().getResourceAsStream(PROD_PROPERTIES);
-		else if(Env.equals("Test") || Env.equals("Testing"))
+		else if(Env.equals("Test") || Env.equals("Testing")) { 
 			inputStream = getClass().getClassLoader().getResourceAsStream(TEST_PROPERTIES); 
-		else {
-			// throw illegal argument exception
 		}
+		else 
+			throw new IllegalArgumentException("Env can be either 'prod' or 'test");
 		
 		try {
 			props.load(inputStream);
 			
 		} catch (IOException e) {
+			System.out.println("inside IO Exception");
 			e.printStackTrace();
 		}
 		finally {
