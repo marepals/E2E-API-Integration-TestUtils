@@ -15,16 +15,19 @@ public class Configuration {
 	private String basePath;
 	
 	private String PROD_PROPERTIES = "prod.properties";
-	private String TEST_PROPERTIES = "prod.properties";
+	private String TEST_PROPERTIES = "test.properties";
 	
 	Properties props = new Properties();
 
 	public Configuration(String Env) {
 		InputStream inputStream = null;
-		
-		if(Env.equals("Prod")|| Env.equals("prod")) 
+		System.out.println("environment passed = "+Env);
+		if(Env.equals("Prod")|| Env.equals("prod")) {
+			System.out.println("setting prod config");
 			inputStream = getClass().getClassLoader().getResourceAsStream(PROD_PROPERTIES);
+		}
 		else if(Env.equals("Test") || Env.equals("Testing")) { 
+			System.out.println("setting Test config");
 			inputStream = getClass().getClassLoader().getResourceAsStream(TEST_PROPERTIES); 
 		}
 		else 

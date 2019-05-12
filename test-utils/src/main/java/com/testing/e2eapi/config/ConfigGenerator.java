@@ -7,7 +7,8 @@ public enum ConfigGenerator {
 	private Configuration config=null;
 	
 	private ConfigGenerator () {
-		String env = System.getenv("ENV_NAME");
+		String env = System.getProperty("env");
+		System.out.println("env passed from command line - "+env);
 		if(env == null)
 			config = new Configuration("Test");
 		else
